@@ -17,12 +17,6 @@ import java.util.logging.Logger;
  * @author dony pradana
  */
 public class DateComparator {
-//
-//    protected static String selisihHari(Date tanggalsatu, Date tanggaldua) {
-//        long selisih1 = Math.abs(tanggaldua.getTime() - tanggalsatu.getTime());
-//        String selisih = selisih1 / (24 * 60 * 60 * 1000) + " hari";
-//        return selisih;
-//    }
 
     public static String selisihHari(String date1, String date2) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");

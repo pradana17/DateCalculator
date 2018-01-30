@@ -32,7 +32,7 @@ public class MyDate {
     }
 
     static boolean validasiBulan(int bulan) throws CustomException {
-        if (bulan < 1 && bulan > 12) {
+        if (bulan < 1 || bulan > 12) {
             JOptionPane.showMessageDialog(null, "Bulan " + bulan + " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
             throw new CustomException("Bulan yang dimasukkan salah");
         }
@@ -51,7 +51,7 @@ public class MyDate {
     }
 
     static boolean validasiTanggal(MyDate abs) throws CustomException {
-        if (validasiBulan(abs.Bulan)&&validasiTahun(abs.Tahun)) {
+        if (validasiBulan(abs.Bulan) && validasiTahun(abs.Tahun)) {
             switch (abs.Bulan) {
                 case 1:
                 case 3:
@@ -73,7 +73,7 @@ public class MyDate {
                     if (abs.Tanggal >= 1 && abs.Tanggal <= 30) {
                         return true;
                     } else {
-                        JOptionPane.showMessageDialog(null, "Tanggal " + abs.Tanggal+  " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Tanggal " + abs.Tanggal + " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
                         throw new CustomException("Tanggal yang dimasukkan salah");
                     }
                 case 2:
@@ -95,6 +95,9 @@ public class MyDate {
                         JOptionPane.showMessageDialog(null, "Tanggal " + abs.Tanggal + " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
                         throw new CustomException("Tanggal yang dimasukkan salah");
                     }
+                default:
+                    JOptionPane.showMessageDialog(null, "Tanggal " + abs.Tanggal + " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    throw new CustomException("Tanggal yang dimasukkan salah");
             }
 
         }
