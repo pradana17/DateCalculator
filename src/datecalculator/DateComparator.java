@@ -18,6 +18,13 @@ import java.util.logging.Logger;
  */
 public class DateComparator {
 
+    /**
+     * Method yang digunakan untuk menghitung selisih hari antara dua tanggal yang di inputkan
+     * @param date1 inputan berupa nilai string tanggal awal dd-mm-yyyy yang nantinya akan diubah type data menjadi date 
+     * @param date2 inputan berupa nilai string tanggal akhir dd-mm-yyyy yang nantinya akan diubah type data menjadi date 
+     * @return akan menghasilkan nilai selisih antara 2 tanggal yang berupa string, apabila tanggal awal > tanggal akhir maka akan menghasilkan "-1", apabila tanggal awal<tanggal akhir maka akan menghasilkan string selisih hari
+     * @throws ParseException 
+     */
     public static String selisihHari(String date1, String date2) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Date tglawal = sdf.parse(date1);

@@ -23,6 +23,12 @@ public class MyDate {
         this.Tahun = tahun;
     }
 
+    /**
+     * method yang digunakan untuk memvalidasi Tahun
+     * @param tahun parameter input dengan nilai berupa integer
+     * @return boolean true apabila inputan tahun bernilai >1970 dan apabila inputan angka <=1970 maka terjadi exception
+     * @throws CustomException 
+     */
     static boolean validasiTahun(int tahun) throws CustomException {
         if (tahun <= 1970) {
             JOptionPane.showMessageDialog(null, "Tahun " + tahun + " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -31,6 +37,12 @@ public class MyDate {
         return true;
     }
 
+    /**
+     * Method yang digunakan untuk mevalidasi Bulan
+     * @param bulan parameter input berupa integer
+     * @return boolean true apabila nilai inputan diantara 1-12 dan akan menghasilkan exception apabila inputan <1 atau >12
+     * @throws CustomException 
+     */
     static boolean validasiBulan(int bulan) throws CustomException {
         if (bulan < 1 || bulan > 12) {
             JOptionPane.showMessageDialog(null, "Bulan " + bulan + " salah", "ERROR", JOptionPane.ERROR_MESSAGE);
@@ -50,6 +62,12 @@ public class MyDate {
         return builder.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * method yang digunakan untuk memvalidasi tanggal
+     * @param abs merupakan object dari MyDate
+     * @return menghasilkan true apabila nilai tanggal sesuai dengan bulannya dan tahunnya
+     * @throws CustomException 
+     */
     static boolean validasiTanggal(MyDate abs) throws CustomException {
         if (validasiBulan(abs.Bulan) && validasiTahun(abs.Tahun)) {
             switch (abs.Bulan) {
