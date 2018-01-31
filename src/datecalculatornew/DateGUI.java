@@ -85,7 +85,7 @@ public class DateGUI extends javax.swing.JFrame {
         jLabel4.setText("KALKULATOR TANGGAL");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
-        jLabel5.setText("Note :");
+        jLabel5.setText("Catatan :");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel6.setText("A. Apabila TanggalAkhir lebih dahulu daripada TanggalAwal,");
