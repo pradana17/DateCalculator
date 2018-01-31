@@ -3,31 +3,33 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package datecalculator;
+package datecalculatornew;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author dony pradana
  */
-public class Coba extends javax.swing.JFrame {
+public class DateGUI extends javax.swing.JFrame {
 
     /*
     *Untuk menampilkan tanggal sekarang
-    */
+     */
     java.util.Date tglSekarang = new java.util.Date();
-    
+
     private SimpleDateFormat smpdtfmt = new SimpleDateFormat("dd MMMMMMMMM yyyy", Locale.getDefault());
     private String tanggal = smpdtfmt.format(tglSekarang);
+
     /**
      * Creates new form Coba
      */
-    public Coba() {
+    public DateGUI() {
         initComponents();
         tglNow.setText(tanggal);
     }
@@ -61,6 +63,7 @@ public class Coba extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         hitung.setText("Hitung");
         hitung.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +102,13 @@ public class Coba extends javax.swing.JFrame {
 
         jLabel11.setText("Selisih");
 
+        jButton1.setText("Close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -108,8 +118,6 @@ public class Coba extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -140,7 +148,13 @@ public class Coba extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(tglNow, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(tglNow, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1))
+                                .addComponent(jLabel6))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(60, 60, 60)
                         .addComponent(jLabel4))
@@ -153,7 +167,7 @@ public class Coba extends javax.swing.JFrame {
                         .addComponent(hasil, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel10)))
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +199,11 @@ public class Coba extends javax.swing.JFrame {
                     .addComponent(hasil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
@@ -201,25 +217,43 @@ public class Coba extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * apabila tombol diklik maka akan menghitung selisih hari dengan memanggil method selisih hari yang sebelumnya dilakukan pengecekan validasi tanggal awal dan validasi tanggal akhir
+     * @param evt 
+     */
     private void hitungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hitungActionPerformed
-        MyDate date1 = new MyDate(Integer.valueOf(tanggalAwal.getText()),
-                Integer.valueOf(bulanAwal.getText()),
-                Integer.valueOf(tahunAwal.getText()));
-        MyDate date2 = new MyDate(Integer.valueOf(tanggalAkhir.getText()),
-                Integer.valueOf(bulanAkhir.getText()),
-                Integer.valueOf(tahunAkhir.getText()));
+        DateComparator dc = new DateComparator();
+        MyDate md;
         try {
-            if (MyDate.validasiTanggal(date1) && MyDate.validasiTanggal(date2)) {
-                System.out.println(DateComparator.selisihHari(date1.toString(), date2.toString()));
-                hasil.setText(DateComparator.selisihHari(date1.toString(), date2.toString()));
+            int tgl1 = Integer.valueOf(tanggalAwal.getText());
+            int bln1 = Integer.valueOf(bulanAwal.getText());
+            int th1 = Integer.valueOf(tahunAwal.getText());
+            int tgl2 = Integer.valueOf(tanggalAkhir.getText());
+            int bln2 = Integer.valueOf(bulanAkhir.getText());
+            int th2 = Integer.valueOf(tahunAkhir.getText());
+            if (dc.validasiTanggal(tgl1, bln1, th1) && dc.validasiTanggal(tgl2, bln2, th2)) {
+                System.out.println(dc.selisihHari(md = new MyDate(tgl1, bln1, th1), md = new MyDate(tgl2, bln2, th2)));
+                hasil.setText(dc.selisihHari(md = new MyDate(tgl1, bln1, th1), md = new MyDate(tgl2, bln2, th2)));
             }
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(null, "Input harus angka", "ERROR", JOptionPane.ERROR_MESSAGE);
         } catch (ParseException ex) {
-//            Logger.getLogger(Coba.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Parse Exception");
         } catch (CustomException ex) {
             System.out.println(ex.getMessage());
         }
     }//GEN-LAST:event_hitungActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int a;
+        a = JOptionPane.showConfirmDialog(null, "Anda yakin ?", "Peringatan", JOptionPane.YES_NO_OPTION);
+        if (a == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        } else {
+            return;
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,20 +272,23 @@ public class Coba extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Coba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Coba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Coba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Coba.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DateGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Coba().setVisible(true);
+                new DateGUI().setVisible(true);
             }
         });
     }
@@ -261,6 +298,7 @@ public class Coba extends javax.swing.JFrame {
     private javax.swing.JTextField bulanAwal;
     private javax.swing.JTextField hasil;
     private javax.swing.JButton hitung;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
